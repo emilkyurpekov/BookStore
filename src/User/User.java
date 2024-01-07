@@ -12,8 +12,8 @@ public class User implements IUser {
     private List<Book> toRead;
     private List<Book> reading;
     public User(String username, String password, List<Book> read, List<Book> toRead, List<Book> reading) {
-        this.username = username;
-        this.password = password;
+        setUsername(username);
+        setPassword(password);
         this.Read = new ArrayList<>();
         this.toRead = new ArrayList<>();
         this.reading = new ArrayList<>();
@@ -50,6 +50,10 @@ public class User implements IUser {
     }
 
     public void setUsername(String username) {
+        if(username.length() < 5){
+            throw new IllegalArgumentException("Username must be 5 or more symbols");
+        }
+
         this.username = username;
     }
 
