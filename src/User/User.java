@@ -58,10 +58,25 @@ public class User implements IUser {
     }
 
     public void setPassword(String password) {
-        if(password.length()<8){
+        if (password.length() < 8) {
             throw new IllegalArgumentException("Password must be 8 or more symbols");
         }
-        //if(!(password.contains("")))
+        boolean hasUpperCase = false;
+        boolean hasDigit = false;
+
+        for (char c : password.toCharArray()) {
+            if (Character.isUpperCase(c)) {
+                hasUpperCase = true;
+            } else if (Character.isDigit(c)) {
+                hasDigit = true;
+            }
+
+            if (hasUpperCase && hasDigit) {
+                this.password = password;
+                return;
+            }
+        }
+        throw new IllegalArgumentException("Password must contain at least one uppercase character and one digit.");
     }
 
     public void setRead(Book book) {
