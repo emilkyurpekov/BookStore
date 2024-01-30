@@ -1,16 +1,19 @@
 package Book;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Book implements IBook {
     private String title;
     private String author;
     private int pages;
-    private String genre;
+    private List<String> genres;
 
-    public Book(String title, String author, int pages, String genre) {
+    public Book(String title, String author, int pages, List<String> genres) {
         this.title = title;
         this.author = author;
         this.setPages(pages);
-        this.genre = genre;
+        this.genres = new ArrayList<>();
     }
 
     @Override
@@ -29,7 +32,8 @@ public class Book implements IBook {
 
     @Override
     public String getGenre() {
-        return this.genre;
+        List<String> toReadBookTitles = getBookGenres(this.genres);
+        return toReadBookTitles.toString();
     }
 
     public void setTitle(String title) {
@@ -49,7 +53,7 @@ public class Book implements IBook {
 
 
     public void setGenre(String genre) {
-        this.genre = genre;
+        this.genres.add(genre);
     }
     @Override
     public String toString() {
@@ -57,7 +61,17 @@ public class Book implements IBook {
                 "title='" + title + '\'' +
                 ", author='" + author + '\'' +
                 ", pages=" + pages +
-                ", genre='" + genre + '\'' +
+                ", genre='" + genres + '\'' +
                 '}';
     }
+    public List<String> getBookGenres(List<String> genresList) {
+        List<String> bookGenres= new ArrayList<>();
+
+        for (String genre : genresList) {
+            bookGenres.add(genre);
+        }
+
+        return bookGenres;
+    }
+
 }
